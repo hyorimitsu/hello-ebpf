@@ -198,7 +198,7 @@ hello-ebpf-api-5fd6fc94c-bl2jn   1/1     Running   0          14m   172.17.0.5  
 hello-ebpf-api-5fd6fc94c-cl5tw   1/1     Running   0          14m   172.17.0.4   minikube   <none>           <none>
 ```
 
-- tools/[ebpf_verifier_error.py](https://github.com/hyorimitsu/hello-ebpf/blob/master/bcc/tools/ebpf_verifier_error.py): Example of an error in the ebpf program. <!-- TODO: 実装 -->
+- tools/[ebpf_verifier_error.py](https://github.com/hyorimitsu/hello-ebpf/blob/master/bcc/tools/ebpf_verifier_error.py): Example of an error in the ebpf program.
 
 #### Output Example
 
