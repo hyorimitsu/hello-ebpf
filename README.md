@@ -154,6 +154,7 @@ minikube delete
 - tools/[monitor_tcp_v4_connect.py](https://github.com/hyorimitsu/hello-ebpf/blob/master/bcc/tools/monitor_tcp_v4_connect.py): Example of monitor tcp v4 connect.
 
 #### Output Example
+
 ```shell
 PID    COMM         SADDR            DADDR            DPORT
 5066   coredns      127.0.0.1        127.0.0.1        8080
@@ -184,6 +185,7 @@ PID    COMM         SADDR            DADDR            DPORT
 |DPORT|Destination Port|
 
 #### Output Confirm
+
 ```shell
 $ host github.com
 github.com has address 13.114.40.48
@@ -197,6 +199,28 @@ hello-ebpf-api-5fd6fc94c-cl5tw   1/1     Running   0          14m   172.17.0.4  
 ```
 
 - tools/[ebpf_verifier_error.py](https://github.com/hyorimitsu/hello-ebpf/blob/master/bcc/tools/ebpf_verifier_error.py): Example of an error in the ebpf program. <!-- TODO: 実装 -->
+
+#### Output Example
+
+```shell
+bpf: Failed to load program: Permission denied
+0: (b7) r1 = 4660
+1: (b7) r2 = 43981
+2: (63) *(u32 *)(r1 +0) = r2
+R1 invalid mem access 'inv'
+
+HINT: The invalid mem access 'inv' error can happen if you try to dereference memory without first using bpf_probe_read() to copy it to the BPF stack. Sometimes the bpf_probe_read is automatic by the bcc rewriter, other times you'll need to be explicit.
+
+Traceback (most recent call last):
+  File "/usr/share/bcc/tools/ebpf_verifier_error.py", line 17, in <module>
+    fn_name="execve_hook")
+  File "/usr/lib/python2.7/dist-packages/bcc/__init__.py", line 650, in attach_kprobe
+    fn = self.load_func(fn_name, BPF.KPROBE)
+  File "/usr/lib/python2.7/dist-packages/bcc/__init__.py", line 391, in load_func
+    (func_name, errstr))
+Exception: Failed to load BPF program execve_hook: Permission denied
+ssh: Process exited with status 1
+```
 
 ### Includes
 
