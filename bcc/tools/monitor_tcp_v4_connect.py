@@ -4,6 +4,7 @@ from __future__ import print_function
 from bcc import BPF
 from bcc.utils import printb
 
+# TODO: ファイル分ける
 bpf_text = """
 #include <uapi/linux/ptrace.h>
 #include <net/sock.h>

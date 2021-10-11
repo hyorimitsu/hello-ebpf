@@ -9,8 +9,8 @@ RUN set -ex; \
     libelf1 \
     libbcc-examples;
 
-COPY customs /usr/share/bcc/tools
-RUN chmod +x /usr/share/bcc/tools/test.py
+COPY tools /usr/share/bcc/tools
+RUN chmod +x /usr/share/bcc/tools/monitor_tcp_v4_connect.py
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
