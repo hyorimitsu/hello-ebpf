@@ -151,8 +151,52 @@ minikube delete
 
 ### Customs
 
-- tools/monitor_tcp_v4_connect.py: Example of monitor tcp v4 connect.
-- tools/ebpf_verifier_error.py: Example of an error in the ebpf program. <!-- TODO: 実装 -->
+- tools/[monitor_tcp_v4_connect.py](https://github.com/hyorimitsu/hello-ebpf/blob/master/bcc/tools/monitor_tcp_v4_connect.py): Example of monitor tcp v4 connect.
+
+#### Output Example
+```shell
+PID    COMM         SADDR            DADDR            DPORT
+5066   coredns      127.0.0.1        127.0.0.1        8080
+4115   kubelet      127.0.0.1        127.0.0.1        10259
+4115   kubelet      192.168.99.116   192.168.99.116   8443
+5066   coredns      127.0.0.1        127.0.0.1        8080
+4126   kubelet      172.17.0.1       172.17.0.2       8181
+4115   kubelet      172.17.0.1       172.17.0.2       8080
+4114   <...>        192.168.99.116   192.168.99.116   8443
+4602   coredns      127.0.0.1        127.0.0.1        8080
+4126   kubelet      192.168.99.116   192.168.99.116   8443
+4597   <...>        127.0.0.1        127.0.0.1        8080
+3580   kube-apiserv 127.0.0.1        127.0.0.1        2379
+...
+# API is connecting to the https://github.com/ when accessing the http://${Service IP}:${Service Port}/?url=https://github.com/ in the browser.
+7975   app-api      172.17.0.4       13.114.40.48     443
+...
+```
+
+#### Output Description
+
+|Name|Description|
+|----|-----------|
+|PID|Process ID|
+|COMM|Exec Command|
+|SADDR|Sender IP|
+|DADDR|Destination IP|
+|DPORT|Destination Port|
+
+#### Output Confirm
+```shell
+$ host github.com
+github.com has address 13.114.40.48
+...
+
+$ kubectl get pods --output=wide --namespace=hello-ebpf
+NAME                             READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+hello-ebpf-api-5fd6fc94c-7s4vc   1/1     Running   0          14m   172.17.0.3   minikube   <none>           <none>
+hello-ebpf-api-5fd6fc94c-bl2jn   1/1     Running   0          14m   172.17.0.5   minikube   <none>           <none>
+hello-ebpf-api-5fd6fc94c-cl5tw   1/1     Running   0          14m   172.17.0.4   minikube   <none>           <none>
+```
+
+- tools/[ebpf_verifier_error.py](https://github.com/hyorimitsu/hello-ebpf/blob/master/bcc/tools/ebpf_verifier_error.py): Example of an error in the ebpf program. <!-- TODO: 実装 -->
 
 ### Includes
 
