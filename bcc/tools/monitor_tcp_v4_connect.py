@@ -4,7 +4,6 @@ from __future__ import print_function
 from bcc import BPF
 from bcc.utils import printb
 
-# TODO: split file
 bpf_text = """
 #include <uapi/linux/ptrace.h>
 #include <net/sock.h>
